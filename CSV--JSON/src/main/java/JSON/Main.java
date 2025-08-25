@@ -86,21 +86,24 @@ public class Main {
             NodeList nodeList = root.getChildNodes();
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node node = nodeList.item(i);
-                if (node.getNodeName().equals("employee")) {
-                    NodeList nodeList1 = node.getChildNodes();
-                    for (int j = 0; j < nodeList1.getLength(); j++) {
-                        Node node_ = nodeList1.item(j);
-                        if (Node.ELEMENT_NODE == node_.getNodeType()) {
-                            elements.add(node_.getTextContent());
-                        }
+                if (Node.ELEMENT_NODE == node.getNodeType()) {
+                    Element employee = (Element) node;
+                    for (int j = 0; j < nodeList.getLength(); j++) {
+                        elements.add(0, (employee.getElementsByTagName("id").item(j).getTextContent()));
+                        elements.add(1, (employee.getElementsByTagName("firstName").item(j).getTextContent()));
+                        elements.add(2, (employee.getElementsByTagName("lastName").item(j).getTextContent()));
+                        elements.add(3, (employee.getElementsByTagName("country").item(j).getTextContent()));
+                        elements.add(4, (employee.getElementsByTagName("age").item(j).getTextContent()));
+
+
+                        list.add(new Employee(
+                                Long.parseLong(elements.get(0)),
+                                elements.get(1),
+                                elements.get(2),
+                                elements.get(3),
+                                Integer.parseInt(elements.get(4))));
+                        elements.clear();
                     }
-                    list.add(new Employee(
-                            Long.parseLong(elements.get(0)),
-                            elements.get(1),
-                            elements.get(2),
-                            elements.get(3),
-                            Integer.parseInt(elements.get(4))));
-                    elements.clear();
                 }
             }
         } catch (Exception e) {
