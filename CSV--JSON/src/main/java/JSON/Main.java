@@ -89,22 +89,15 @@ public class Main {
                 Node node = nodeList.item(i);
                 if (Node.ELEMENT_NODE == node.getNodeType()) {
                     Element employee = (Element) node;
-                    for (int j = 0; j < nodeList.getLength(); j++) {
-                        elements.add(0, (employee.getElementsByTagName("id").item(j).getTextContent()));
-                        elements.add(1, (employee.getElementsByTagName("firstName").item(j).getTextContent()));
-                        elements.add(2, (employee.getElementsByTagName("lastName").item(j).getTextContent()));
-                        elements.add(3, (employee.getElementsByTagName("country").item(j).getTextContent()));
-                        elements.add(4, (employee.getElementsByTagName("age").item(j).getTextContent()));
+                    long id = Integer.parseInt(employee.getElementsByTagName("id").item(0).getTextContent());
+                    String firstName = employee.getElementsByTagName("firstName").item(0).getTextContent();
+                    String lastName = employee.getElementsByTagName("lastName").item(0).getTextContent();
+                    String country = employee.getElementsByTagName("country").item(0).getTextContent();
+                    int age = Integer.parseInt(employee.getElementsByTagName("age").item(0).getTextContent());
 
 
-                        list.add(new Employee(
-                                Long.parseLong(elements.get(0)),
-                                elements.get(1),
-                                elements.get(2),
-                                elements.get(3),
-                                Integer.parseInt(elements.get(4))));
-                        elements.clear();
-                    }
+                    Employee employee1 = new Employee(id, firstName, lastName, country, age);
+                    list.add(employee1);
                 }
             }
         } catch (Exception e) {
